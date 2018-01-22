@@ -1,10 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const extendStyletron = styletron => {
+  styletron.declarations = {};
+
+  const originalInjectRawDeclaration =
+    styletron.injectRawDeclaration.bind(styletron);
+
+  function injectRawDeclaration(decl) {
+    const cn = originalInjectRawDeclaration(decl);
+    this.declarations[cn] = decl;
+    return cn;
+  }
+
+  styletron.injectRawDeclaration = injectRawDeclaration.bind(styletron);
+  return styletron;
+}
+
 class StyletronProvider extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.styletron = props.styletron;
+    this.styletron = extendStyletron(props.styletron);
   }
   getChildContext() {
     return {styletron: this.styletron};

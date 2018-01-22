@@ -13,7 +13,14 @@ const extendStyletron = styletron => {
     return cn;
   }
 
+  function getDeclarationFromClassName(cn) {
+    return this.declarations[cn];
+  }
+
   styletron.injectRawDeclaration = injectRawDeclaration.bind(styletron);
+  styletron.getDeclarationFromClassName =
+    getDeclarationFromClassName.bind(styletron);
+
   return styletron;
 }
 

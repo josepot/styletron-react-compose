@@ -88,7 +88,7 @@ function createStyledElementComponent(base, stylesArray) {
 
   StyledElement.contextTypes = {styletron: PropTypes.object};
 
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     const name = base.displayName
       ? base.displayName
       : typeof base === 'function' ? base.name : base;

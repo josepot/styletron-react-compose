@@ -86,7 +86,8 @@ function createStyledElementComponent(base, stylesArray) {
     styles: stylesArray,
   };
 
-  StyledElement.contextTypes = {styletron: PropTypes.object};
+  StyledElement.contextTypes = Object.assign({}, base.contextTypes);
+  StyledElement.contextTypes.styletron = PropTypes.object;
 
   if (process.env.NODE_ENV !== 'production') {
     const name = base.displayName
